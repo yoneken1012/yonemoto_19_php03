@@ -5,7 +5,7 @@
 - PHPとMySQLを用いて、書籍名・URL・コメントを登録し、登録済みデータを一覧表示できるブックマーク管理アプリ。
 
 ## ③アプリのデプロイURL
-- http://yone-ken.sakura.ne.jp/yonemoto_19_php01/post.php
+- http://yone-ken.sakura.ne.jp/yonemoto_19_php02/index.php
 
 ## ④アプリのログイン用IDまたはPassword（ある場合）
 - ID: 今回なし
