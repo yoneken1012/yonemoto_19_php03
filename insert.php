@@ -16,7 +16,7 @@ $comment = $_POST["comment"];
 //2. DB接続します
 try {
   //ID:'root', Password: xamppは 空白 ''
-  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=www2191.sakura.ne.jp','root',''); // ユーザー名：root, PW：無し
+  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=www2191.sakura.ne.jp','yone-ken',''); // ユーザー名：root, PW：無し
 } catch (PDOException $e) {
   exit('DBConnectError:'.$e->getMessage());
 }
