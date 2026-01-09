@@ -3,7 +3,7 @@
 //1.  DB接続
 try {
   //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=localhost', 'root', '');
+  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=yone-ken.sakura.ne.jp','yone-ken','NTc-5AWP6mEu');
 } catch (PDOException $e) {
   exit('DBConnectError'.$e->getMessage());
 }
