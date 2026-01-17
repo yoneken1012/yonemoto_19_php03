@@ -2,7 +2,7 @@
 // ========= DB接続 =========
 try {
   //$pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=yone-ken.sakura.ne.jp','yone-ken','NTc-5AWP6mEu');
-  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=','yone-ken','');
+  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=localhost','yone-ken','NTc-5AWP6mEu'); // ユーザー名：root, PW：無し
 } catch (PDOException $e) {
   exit('DBConnectError:'.$e->getMessage());
 }
