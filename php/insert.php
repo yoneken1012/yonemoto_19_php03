@@ -17,7 +17,7 @@ $comment = $_POST["comment"];
 try {
   //ID:'root', Password: xamppは 空白 ''
   // $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=yone-ken.sakura.ne.jp','yone-ken','NTc-5AWP6mEu'); // ユーザー名：root, PW：無し
-  $pdo = new PDO('mysql:dbname=yoneken_db1;charset=utf8;host=mysql3112.db.sakura.ne.jp','yoneken_db1','NTc-5AWP6mEu'); // ユーザー名：root, PW：無し
+  $pdo = new PDO('mysql:dbname=yone-ken_db1;charset=utf8;host=mysql3112.db.sakura.ne.jp','yone-ken_db1',''); // ユーザー名：root, PW：無し
 } catch (PDOException $e) {
   exit('DBConnectError:'.$e->getMessage());
 }

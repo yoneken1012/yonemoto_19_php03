@@ -11,7 +11,7 @@ $isLogin = is_login();
 if ($isLogin && isset($_GET["act"]) && $_GET["act"] === "del") {
   $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
   if ($id > 0) {
-    $sql = "DELETE FROM bm_items WHERE id=:id";
+    $sql = "DELETE FROM gs_bm_table WHERE id=:id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $status = $stmt->execute();
@@ -32,7 +32,7 @@ if ($isLogin && isset($_POST["act"]) && $_POST["act"] === "update") {
   $comment = $_POST["comment"] ?? "";
 
   if ($id > 0) {
-    $sql = "UPDATE bm_items
+    $sql = "UPDATE gs_bm_table
             SET name=:name, url=:url, comment=:comment
             WHERE id=:id";
     $stmt = $pdo->prepare($sql);
@@ -56,7 +56,7 @@ $editRow = null;
 if ($isLogin && isset($_GET["id"])) {
   $editId = (int)$_GET["id"];
   if ($editId > 0) {
-    $sql = "SELECT * FROM bm_items WHERE id=:id";
+    $sql = "SELECT * FROM gs_bm_table WHERE id=:id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $editId, PDO::PARAM_INT);
     $status = $stmt->execute();
@@ -75,12 +75,21 @@ if ($q !== "") {
   $where = "WHERE name LIKE :q OR url LIKE :q OR comment LIKE :q";
 }
 
-// ======== 一覧取得 ========
-$sql = "SELECT * FROM bm_items $where ORDER BY date DESC";
-$stmt = $pdo->prepare($sql);
-if ($q !== "") {
-  $stmt->bindValue(":q", "%".$q."%", PDO::PARAM_STR);
+// ========= 一覧取得（検索付き） =========
+$q = trim($_GET['q'] ?? '');
+
+$sql = "SELECT * FROM gs_bm_table";
+if ($q !== '') {
+  $sql .= " WHERE name LIKE :kw OR url LIKE :kw OR comment LIKE :kw";
 }
+$sql .= " ORDER BY date DESC";
+
+$stmt = $pdo->prepare($sql);
+
+if ($q !== '') {
+  $stmt->bindValue(':kw', '%'.$q.'%', PDO::PARAM_STR);
+}
+
 $status = $stmt->execute();
 if ($status === false) {
   $error = $stmt->errorInfo();
@@ -115,7 +124,8 @@ if ($status === false) {
 <p><a href="index.php">← 登録画面へ戻る</a></p>
 
 <form method="get" action="select.php">
-  <input type="text" name="q" value="<?= h($q) ?>" placeholder="検索（書籍名/URL/コメント）">
+  <input type="text" name="q" value="<?= htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+         placeholder="検索（書籍名/URL/コメント）">
   <button type="submit">検索</button>
   <a href="select.php">クリア</a>
 </form>

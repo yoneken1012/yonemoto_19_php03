@@ -8,7 +8,7 @@ $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
 if ($id <= 0) exit("IDが不正です");
 
 $pdo = db_conn();
-$sql = "SELECT * FROM bm_items WHERE id = :id";
+$sql = "SELECT * FROM gs_bm_table WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 $stmt->execute();
